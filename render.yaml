@@ -4,4 +4,9 @@ services:
     env: python
     plan: free
     buildCommand: pip install -r requirements.txt
-    startCommand: python -c "from edo_ldpr_cloud import app_flask, init_db, seed_database; app_flask.app_context().push(); init_db(); seed_database(); app_flask.run(host='0.0.0.0', port=5000)"
+    startCommand: gunicorn app:app
+    envVars:
+      - key: DATABASE_URL
+        scope: build,runtime
+      - key: FLASK_SECRET
+        scope: build,runtime
