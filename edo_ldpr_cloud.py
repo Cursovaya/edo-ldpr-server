@@ -14,16 +14,6 @@ from datetime import datetime, timedelta
 from functools import wraps
 from pathlib import Path
 
-# PyQt6
-from PyQt6.QtWidgets import (
-    QApplication, QMainWindow, QWidget, QVBoxLayout, QLabel,
-    QMessageBox, QStatusBar, QMenuBar, QDialog, QProgressBar
-)
-from PyQt6.QtCore import Qt, QThread, pyqtSignal, QUrl, QTimer
-from PyQt6.QtGui import QFont, QAction, QIcon
-from PyQt6.QtWebEngineWidgets import QWebEngineView
-from PyQt6.QtWebEngineCore import QWebEngineSettings
-
 # Flask
 from flask import (
     Flask, render_template_string, request, redirect, url_for,
@@ -36,6 +26,9 @@ from jinja2 import DictLoader
 import psycopg2
 import psycopg2.extras
 
+# ⚠️ НЕ импортируем PyQt6 здесь! Только локально нужен!
+# from PyQt6.QtWidgets import (  ← УДАЛИТЕ ЭТИ СТРОКИ
+
 # ============================================================
 # КОНФИГУРАЦИЯ
 # ============================================================
@@ -45,10 +38,6 @@ app_flask.secret_key = os.environ.get('FLASK_SECRET', 'edo-ldpr-local-secret-key
 app_flask.config['PERMANENT_SESSION_LIFETIME'] = timedelta(hours=8)
 
 # 🔑 ПЕРЕМЕННЫЕ ОКРУЖЕНИЯ для Render
-# ВАЖНО: установите эти переменные в Render Dashboard → Environment
-# DATABASE_URL=postgresql://user:password@dpg-xxxxx.render.com/dbname
-# FLASK_SECRET=your-secret-key
-
 DATABASE_URL = os.environ.get(
     'DATABASE_URL',
     'postgresql://user:password@localhost:5432/edo_ldpr'
