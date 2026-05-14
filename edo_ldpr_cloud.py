@@ -1606,6 +1606,7 @@ def run_local():
 
     main()
 
-# Точка входа для локального запуска
 if __name__ == '__main__':
-    run_local()
+    # Это не запустится на Render
+    # На Render запускает app.py
+    pass
