@@ -1,5 +1,8 @@
-Flask==2.3.3
-Werkzeug==2.3.7
-Jinja2==3.1.2
+PyQt6==6.7.1
+PyQt6-WebEngine==6.7.1
+Flask==3.0.0
 psycopg2-binary==2.9.9
-gunicorn==21.2.0
+Werkzeug==3.0.1
+Jinja2==3.1.2
+gunicorn==22.0.0
+python-dotenv==1.0.0
