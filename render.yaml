@@ -1,21 +1,7 @@
 services:
   - type: web
-    name: edo-ldpr-server
-    runtime: python
+    name: edo-ldpr-api
+    env: python
     plan: free
-    buildCommand: pip install -r render_requirements.txt
-    startCommand: gunicorn edo_server_render:app --bind 0.0.0.0:$PORT
-    envVars:
-      - key: PYTHON_VERSION
-        value: 3.11.0
-      - key: SECRET_KEY
-        generateValue: true
-      - key: DATABASE_URL
-        fromDatabase:
-          name: edo-ldpr-db
-          property: connectionString
-
-databases:
-  - name: edo-ldpr-db
-    plan: free
-    postgresMajorVersion: 15
+    buildCommand: pip install -r requirements.txt
+    startCommand: python -c "from edo_ldpr_cloud import app_flask, init_db, seed_database; app_flask.app_context().push(); init_db(); seed_database(); app_flask.run(host='0.0.0.0', port=5000)"
